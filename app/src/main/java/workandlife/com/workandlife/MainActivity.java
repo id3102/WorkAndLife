@@ -9,6 +9,9 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -27,12 +30,6 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();;
-        stopService(new Intent(MainActivity.this, KeyListenerService.class));
-    }
-
     public void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {   // 마시멜로우 이상일 경우
             if (!Settings.canDrawOverlays(this)) {              // 체크
@@ -40,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
                         Uri.parse("package:" + getPackageName()));
                 startActivityForResult(intent, ACTION_MANAGE_OVERLAY_PERMISSION_REQUEST_CODE);
             } else {
-                startService(new Intent(MainActivity.this, KeyListenerService.class));
+                startService(new Intent(MainActivity.this, FloatingButtonService.class));
             }
         } else {
-            startService(new Intent(MainActivity.this, KeyListenerService.class));
+            startService(new Intent(MainActivity.this, FloatingButtonService.class));
         }
     }
 
@@ -56,8 +53,26 @@ public class MainActivity extends AppCompatActivity {
                 // TODO 동의를 얻지 못했을 경우의 처리
 
             } else {
-                startService(new Intent(MainActivity.this, KeyListenerService.class));
+                startService(new Intent(MainActivity.this, FloatingButtonService.class));
             }
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/service_root_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:id="@+id/status_text"
+        android:text="@string/start_working"
+        android:textSize="9sp"/>
+
+    <Button
+        android:id="@+id/floating_start"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@mipmap/ic_play"
+        android:layout_below="@id/status_text"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/status_text" >
+        <Button
+            android:id="@+id/floating_pause"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/ic_pause"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/floating_stop"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/ic_stop"
+            android:layout_marginLeft="2dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+</RelativeLayout>

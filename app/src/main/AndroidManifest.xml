@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="workandlife.com.workandlife">
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -20,9 +20,13 @@
         </activity>
 
         <service
-            android:name="KeyListenerService"
+            android:name=".FloatingButtonService"
             android:enabled="true"
             android:permission="android.permission.SYSTEM_ALERT_WINDOW" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>
